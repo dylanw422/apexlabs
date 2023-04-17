@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Flex, Text, Button, Image, Heading, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 export default function Home() {
+  const { data: session } = useSession()
+  console.log(session)
   return (
     <>
       <Head>
@@ -14,101 +13,21 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      <Flex bgImage='url(/chart2.png)' bgRepeat='none' bgSize='cover' bgColor='black' h='100vh' w='100%' direction='column' align='center'>
+        <Flex w='50%' h='8vh' align='center' justify='space-between'>
+          <Image src='/apexlogo.png' boxSize={10} />
+          { !session ? <Button onClick={() => signIn('discord')} bgColor='#5865f2' leftIcon={<Image src='/discord.png' boxSize={5}/>}>Sign In</Button> : <Button onClick={() => signOut()}>{session.user.name}</Button> }
+        </Flex>
+        <Flex h='76vh' direction='column' align='center' justify='center'>
+          <Heading fontSize='500%'>Welcome to Apex</Heading>
+          <InputGroup mt='5%'>
+            <Input pr='4.5rem' placeholder='TradingView Username'></Input>
+            <InputRightElement w='4.5rem'>
+              <Button borderRadius='0px 5px 5px 0px' fontSize='75%'>Submit</Button>
+            </InputRightElement>
+          </InputGroup>
+        </Flex>
+      </Flex>
     </>
   )
 }
