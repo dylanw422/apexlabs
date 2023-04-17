@@ -19,7 +19,7 @@ export default function Home() {
           { !session ? <Button onClick={() => signIn('discord')} bgColor='#5865f2' leftIcon={<Image src='/discord.png' boxSize={5}/>}>Sign In</Button> : <Button onClick={() => signOut()}>{session.user.name}</Button> }
         </Flex>
         <Flex h='76vh' direction='column' align='center' justify='center'>
-          <Heading fontSize='500%'>Welcome to Apex</Heading>
+          <Heading fontSize='500%'>Welcome to ApexLabs</Heading>
           <InputGroup mt='5%'>
             <Input pr='4.5rem' placeholder='TradingView Username'></Input>
             <InputRightElement w='4.5rem'>
