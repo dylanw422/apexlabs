@@ -19,6 +19,8 @@ export default function Home() {
   const [username, setUsername] = useState('')
   const { data: session } = useSession()
 
+  console.log(session)
+
   let params = {
     username: "Apex Labs",
     content: session ? `<@${session.user.id}>: ${username}` : username
