@@ -15,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <DarkMode>
+      <LightMode>
         <Flex bgImage='url(/chart2.png)' bgRepeat='none' bgSize='cover' bgColor='black' h='100vh' w='100%' direction='column' align='center'>
           <Flex w='50%' h='8vh' align='center' justify='space-between'>
             <Image src='/apexlogo.png' boxSize={10} />
@@ -31,7 +31,7 @@ export default function Home() {
             </InputGroup>
           </Flex>
         </Flex>
-      </DarkMode>
+      </LightMode>
     </>
   )
 }
