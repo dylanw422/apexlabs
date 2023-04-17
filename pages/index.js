@@ -1,6 +1,17 @@
 import Head from 'next/head'
 import { Flex, Text, Button, Image, Heading, Input, InputGroup, InputRightElement, useColorMode, LightMode, DarkMode } from '@chakra-ui/react'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from '@chakra-ui/react'
 
 export default function Home() {
   const { data: session } = useSession()
@@ -15,23 +26,21 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <LightMode>
         <Flex bgImage='url(/chart2.png)' bgRepeat='none' bgSize='cover' bgColor='black' h='100vh' w='100%' direction='column' align='center'>
           <Flex w='50%' h='8vh' align='center' justify='space-between'>
             <Image src='/apexlogo.png' boxSize={10} />
-            { !session ? <Button onClick={() => signIn('discord')} bgColor='#5865f2' leftIcon={<Image src='/discord.png' boxSize={5}/>}>Sign In</Button> : <Button onClick={() => signOut()}>{session.user.name}</Button> }
+            { !session ? <Button onClick={() => signIn('discord')} bgColor='#5865f2' color='white' leftIcon={<Image src='/discord.png' boxSize={5}/>}>Sign In</Button> : <Button onClick={() => signOut()}>{session.user.name}</Button> }
           </Flex>
           <Flex h='76vh' direction='column' align='center' justify='center'>
-            <Heading fontSize='500%'>Welcome to ApexLabs</Heading>
+            <Heading color='white' fontSize='500%'>Welcome to Apex</Heading>
             <InputGroup mt='5%'>
-              <Input pr='4.5rem' placeholder='TradingView Username'></Input>
+              <Input color='white' pr='4.5rem' placeholder='TradingView Username'></Input>
               <InputRightElement w='4.5rem'>
                 <Button borderRadius='0px 5px 5px 0px' fontSize='75%'>Submit</Button>
               </InputRightElement>
             </InputGroup>
           </Flex>
         </Flex>
-      </LightMode>
     </>
   )
 }
