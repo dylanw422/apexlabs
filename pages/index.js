@@ -17,9 +17,8 @@ import {
 export default function Home() {
   const toast = useToast()
   const [username, setUsername] = useState('')
+  const [discordData, setDiscordData] = useState([])
   const { data: session } = useSession()
-
-  console.log(session)
 
   let params = {
     username: "Apex Labs",
@@ -36,6 +35,15 @@ export default function Home() {
     })
   }
 
+  async function getDiscordData() {
+    await fetch('https://discord.com/api/users/@me/guilds/1081469674807640144/member', {
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+        "Content-Type": 'application/json'
+      }
+    }).then(res => res.json()).then(data => setDiscordData(data))
+  }
+
   function handleSession() {
     if (!session) {
       toast({
@@ -45,7 +53,8 @@ export default function Home() {
         position: 'top'
       })
     } else {
-      if (session.user.guild.roles.includes('1090105757271339198')) {
+      getDiscordData()
+      if (discordData.roles.includes('1090105757271339198')) {
         sendWebhook(params)
         toast({
           title: "Success",
